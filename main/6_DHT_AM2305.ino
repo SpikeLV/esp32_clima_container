@@ -16,7 +16,7 @@ void getHumi(){
     curent_humi = (int)temp_h;
 }
 
-void get_Temp(){
+void getTemp(){
     float temp_t;
     temp_t = dht.readTemperature();
     if ( isnan(temp_t) ) {

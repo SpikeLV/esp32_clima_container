@@ -27,13 +27,13 @@
 
 #define TRASHOLE_MIN 3
 
-#define VENT_PIN 14
-#define HEATER_PIN 27
+#define VENT_PIN 16
+#define HEATER_PIN 17
 
 // temperature and humidity AM2305
-#define DHTPIN 15
+#define DHTPIN 26
 #define DHTTYPE DHT22
 
 // Serial2 for Display
-#define NEXTION_RX 16  // Connect to Nextion TX
-#define NEXTION_TX 17  // Connect to Nextion RX
+#define NEXTION_RX 35  // Connect to Nextion TX
+#define NEXTION_TX 32  // Connect to Nextion RX

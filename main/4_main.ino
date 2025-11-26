@@ -15,15 +15,16 @@ void setup() {
     setAM2305();
     delay(500);
 
-    get_Humi();
-    get_Temp();
+    getHumi();
+    getTemp();
 
     
     Nextion_displayHumidity(curent_humi);
     Nextion_displayTemperature(curent_temp);
 
+
     delay(500);
-    Nextion_setScreen();
+    Nextion_setScreen(24, 60);
 }
 
 void loop() {
@@ -33,9 +34,10 @@ void loop() {
     if ((millis() - lastIsrAt5) > 2000) {
         lastIsrAt5 = millis();
         getHumi();
-        get_Temp();
+        getTemp();
         Nextion_displayHumidity(curent_humi);
         Nextion_displayTemperature(curent_temp);
+        debug.println(curent_temp);
     }
     if(lastIsrAt5>millis()){
         lastIsrAt5 = 0;

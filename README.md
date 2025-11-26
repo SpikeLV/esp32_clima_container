@@ -24,7 +24,7 @@ ESP32-based climate control system for storage containers with temperature and h
 |-----------|-----|-------------|
 | Ventilation Relay | GPIO 14 | Controls ventilation fan |
 | Heater Relay | GPIO 27 | Controls heating element |
-| DHT22/AM2305 | GPIO 15 | Temperature & humidity sensor |
+| DHT22/AM2305 | GPIO 26 | Temperature & humidity sensor |
 | Nextion RX | GPIO 16 | Display communication (RX) |
 | Nextion TX | GPIO 17 | Display communication (TX) |
 

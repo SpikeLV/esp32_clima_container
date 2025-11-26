@@ -52,7 +52,10 @@ uint8_t Nextion_readVal(String input, uint8_t position){
     return number;
 }
 
-void Nextion_setScreen(){
+void Nextion_setScreen(uint8_t init_temp, uint8_t init_humi){
+    Nextion_send_Int("p_main.n1.val", init_temp);
+    Nextion_send_Int("p_main.n2.val", init_humi);
+
     Nextion_send_Str("page p_main");
 
     //Nextion_send_Int("p_live.action_temp.pco", 35921);
@@ -61,12 +64,11 @@ void Nextion_setScreen(){
 }
 
 void Nextion_displayTemperature(int8_t value){
-    Nextion_send_Int("p_set.run_temp.val", value);
-    Nextion_send_Int("p_live.run_temp.val", value);
+    Nextion_send_Int("p_main.curent_temp.val", value);
 }
 
 void Nextion_displayHumidity(uint8_t value){
-    Nextion_send_Int("p_main.hum_01.val", value);
+    Nextion_send_Int("p_main.curent_hum.val", value);
 }
 
 
