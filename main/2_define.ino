@@ -22,6 +22,8 @@
 #define STOPPING  5
 #define STOPPED   6
 
+#define POWER_LED_PIN 23
+
 #define RELAY_ON 1
 #define RELAY_OFF 0
 

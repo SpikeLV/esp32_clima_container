@@ -4,6 +4,9 @@ void setup() {
     debug.begin(115200);
     debug_println("Storage Container R.20251124-01"); // relay for ventilation and heating logic
 
+    pinMode(POWER_LED_PIN, OUTPUT);
+    digitalWrite(POWER_LED_PIN, HIGH);
+
     nextionSerial.begin(9600, SERIAL_8N1, NEXTION_RX, NEXTION_TX);
     
     Nextion_send_Str("loading.txt=\"Loading relay\"");
