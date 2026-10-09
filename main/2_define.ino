@@ -4,13 +4,9 @@
 #if DEBUG == 1
 #define debug_print(x) debug.print(x)
 #define debug_println(x) debug.println(x)
-#define NET_SSID "Do-You-24-2"
-#define NET_PASSWORD "Moon413157"
 #else
 #define debug_print(x)
 #define debug_println(x)
-#define NET_SSID "TomyLimon"
-#define NET_PASSWORD "Moon413157" 
 #endif
 
 // devices status
@@ -33,7 +29,7 @@
 #define HEATER_PIN 17
 
 // temperature and humidity AM2305
-#define DHTPIN 26
+#define DHTPIN 15
 #define DHTTYPE DHT22
 
 // Serial2 for Display
