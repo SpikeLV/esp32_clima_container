@@ -1,3 +1,47 @@
+void appendResetLog(const String &msg) {
+    // SPIFFS may not be mounted yet (this runs early in setup)
+    if (!SPIFFS.begin(true)) {
+        return;
+    }
+
+    // Keep the log from growing without bound: wipe if it gets too big
+    File check = SPIFFS.open(RESET_LOG_PATH, FILE_READ);
+    if (check) {
+        size_t size = check.size();
+        check.close();
+        if (size > RESET_LOG_MAX_SIZE) {
+            SPIFFS.remove(RESET_LOG_PATH);
+        }
+    }
+
+    File file = SPIFFS.open(RESET_LOG_PATH, FILE_APPEND);
+    if (!file) {
+        return;
+    }
+    file.println(msg);
+    file.close();
+}
+
+String readResetLog() {
+    if (!SPIFFS.begin(true)) {
+        return "SPIFFS mount failed";
+    }
+    File file = SPIFFS.open(RESET_LOG_PATH, FILE_READ);
+    if (!file) {
+        return "";
+    }
+    String content = file.readString();
+    file.close();
+    return content;
+}
+
+void clearResetLog() {
+    if (!SPIFFS.begin(true)) {
+        return;
+    }
+    SPIFFS.remove(RESET_LOG_PATH);
+}
+
 bool saveSetpoints() {
     File file = SPIFFS.open(SETPOINTS_PATH, FILE_WRITE);
     if (!file) {

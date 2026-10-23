@@ -1,8 +1,30 @@
 HardwareSerial nextionSerial(1);
 
+void logResetReason() {
+    esp_reset_reason_t reason = esp_reset_reason();
+    String text;
+    switch (reason) {
+        case ESP_RST_POWERON:   text = "POWERON";   break; // normal power-on
+        case ESP_RST_EXT:       text = "EXT";        break; // external pin reset
+        case ESP_RST_SW:        text = "SW";         break; // esp_restart()
+        case ESP_RST_PANIC:     text = "PANIC";      break; // exception/panic (crash)
+        case ESP_RST_INT_WDT:   text = "INT_WDT";    break; // interrupt watchdog
+        case ESP_RST_TASK_WDT:  text = "TASK_WDT";   break; // task watchdog
+        case ESP_RST_WDT:       text = "WDT";        break; // other watchdog
+        case ESP_RST_DEEPSLEEP: text = "DEEPSLEEP";  break;
+        case ESP_RST_BROWNOUT:  text = "BROWNOUT";   break; // voltage sag (relays!)
+        case ESP_RST_SDIO:      text = "SDIO";       break;
+        default:                text = "UNKNOWN";    break;
+    }
+
+    String line = "Reset reason: " + String((int)reason) + " (" + text + ")";
+    appendResetLog(line);
+}
+
 void setup() {
     debug.begin(115200);
     debug_println("Storage Container R.20251124-01"); // relay for ventilation and heating logic
+    logResetReason();
 
     pinMode(POWER_LED_PIN, OUTPUT);
     digitalWrite(POWER_LED_PIN, HIGH);
@@ -11,6 +33,10 @@ void setup() {
 
     Nextion_send_Str("loading.txt=\"Loading settings\"");
     loadSetpoints();
+
+    Nextion_send_Str("loading.txt=\"Loading WiFi\"");
+    setupWiFi();
+    setupWebServer();
     
     Nextion_send_Str("loading.txt=\"Loading relay\"");
     setUpRelay();
@@ -34,6 +60,7 @@ void setup() {
 }
 
 void loop() {
+    server.handleClient();
     Nextion_read();
 
     //  -------- Reading sensor each X seconds

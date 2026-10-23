@@ -28,6 +28,12 @@
 #define DEFAULT_SET_TEMPERATURE 24
 #define DEFAULT_SET_HUMIDITY 60
 #define SETPOINTS_PATH "/setpoints.txt"
+#define RESET_LOG_PATH "/reset_log.txt"
+#define RESET_LOG_MAX_SIZE 4096
+
+#define WIFI_SSID "arret-tech"
+#define WIFI_PASSWORD "12345"
+#define WIFI_CONNECT_TIMEOUT 15000  // ms to wait for connection
 
 #define VENT_PIN 16
 #define HEATER_PIN 17
