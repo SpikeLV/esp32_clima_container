@@ -25,6 +25,10 @@
 
 #define TRASHOLE_MIN 3
 
+#define DEFAULT_SET_TEMPERATURE 24
+#define DEFAULT_SET_HUMIDITY 60
+#define SETPOINTS_PATH "/setpoints.txt"
+
 #define VENT_PIN 16
 #define HEATER_PIN 17
 

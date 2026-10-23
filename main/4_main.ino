@@ -8,6 +8,9 @@ void setup() {
     digitalWrite(POWER_LED_PIN, HIGH);
 
     nextionSerial.begin(9600, SERIAL_8N1, NEXTION_RX, NEXTION_TX);
+
+    Nextion_send_Str("loading.txt=\"Loading settings\"");
+    loadSetpoints();
     
     Nextion_send_Str("loading.txt=\"Loading relay\"");
     setUpRelay();
@@ -27,7 +30,7 @@ void setup() {
 
 
     delay(500);
-    Nextion_setScreen(24, 60);
+    Nextion_setScreen(set_temperature, set_humidity);
 }
 
 void loop() {
@@ -73,6 +76,7 @@ void loop() {
     ///// CLIMAT VENT
     if(nextion_action.indexOf("VENT_A_ON") != -1){
         set_humidity = Nextion_readVal(nextion_action, 1);
+        saveSetpoints();
         debug.println(set_humidity);
         vent_action_status = RUNNING;
         debug.println("VENT_A_ON");
@@ -88,6 +92,7 @@ void loop() {
     ///// CLIMAT HEATER
     if(nextion_action.indexOf("HEATER_A_ON") != -1){
         set_temperature = Nextion_readVal(nextion_action, 1);
+        saveSetpoints();
         debug.println(set_temperature);
         heater_action_status = RUNNING;
         debug.println("HEATER_A_ON");

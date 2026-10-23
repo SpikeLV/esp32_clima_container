@@ -6,8 +6,8 @@ uint8_t tmp_temp = 0;
 uint8_t action_time = 0;  // timer in minutes to run (from Display)
 uint8_t action_temp = 0;  // temperature settings (from Display)
 
-uint8_t set_humidity = 0;
-uint8_t set_temperature = 0;
+uint8_t set_humidity = DEFAULT_SET_HUMIDITY;
+uint8_t set_temperature = DEFAULT_SET_TEMPERATURE;
 
 volatile uint32_t lastIsrAt5 = millis();
 volatile uint32_t timer_running = millis();
